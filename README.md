@@ -69,6 +69,8 @@ Event | Description
 
 ## Usage
 
+##### [Working Demo project (needs to be downloaded run)](https://github.com/vahidhedayati/vue-autocompletion-test)
+
 ##### Example 1: Basic 
 
 ```html
