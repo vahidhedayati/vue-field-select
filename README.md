@@ -17,21 +17,25 @@ npm i  vue-field-select --save
 ## Second
 Require in your project:
 ```
-var VueAutocompletion = require('vue-field-select');
+var VueFieldSelect = require('vue-field-select');
 ```
 or ES6 syntax:
 ```js
-import VueAutocompletion from 'vue-field-select'
+import VueFieldSelect from 'vue-field-select'
+import {VueFieldSelectValid} from 'vue-field-select'
 ```
 
 # Third
 You can register the component globally:
 ```
-Vue.component('autocomplete', VueAutocompletion);
+Vue.component('vue-field-select', VueFieldSelect)
+                                                
 ```
-Or locally in a single Vue component:
+Or locally in a single Vue component / both not needed / an example of either:
 ```
- components: { 'autocomplete':VueAutocompletion },
+ components: { 'vue-field-select':VueFieldSelect,
+'vue-field-select-valid':VueFieldSelectValid,
+ },
 ```
 
 #### All Available Props for vue-field-select
