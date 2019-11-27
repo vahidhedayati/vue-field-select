@@ -300,8 +300,16 @@ export default {
 ```
 
 #### Changelog
-#### v.1.0.1 
-- minor logic issues spotted 
+#### v.1.1.4
+This is really version 1.0.1, should have kept to 1.1.3 as initial release to save on current headache revert
+ 
+#### v.1.0.2 / 1.0.1 
+- minor logic issues spotted  - but due to a bad release of 1.1.3 I can't publish properly 
+`npm version patch && npm publish --tag current-version`    `npm info vue-field-select versions`
+None of this update to the latest which is now an old tag 
+grrrr...
+
+
 #### v.1.0.0
 - Working release built on webpack 4 - includes `vue-field-select` & `vue-field-select-valid`
  
