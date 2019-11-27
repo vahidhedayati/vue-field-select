@@ -1,4 +1,4 @@
-# Vue Autocompletion
+# VueFieldSelect vue-field-select
 [![npm (scoped)](https://img.shields.io/npm/v/vue-field-select.svg?style=flat-square)](https://www.npmjs.com/package/vue-field-select)
 [![npm](https://img.shields.io/npm/dm/vue-field-select.svg?style=flat-square)](https://www.npmjs.com/package/vue-field-select)
 [![MIT](https://img.shields.io/github/license/vahidhedayati/vue-field-select.svg?style=flat-square)](https://opensource.org/licenses/MIT)
@@ -300,7 +300,8 @@ export default {
 ```
 
 #### Changelog
-
+#### v.1.0.1 
+- minor logic issues spotted 
 #### v.1.0.0
 - Working release built on webpack 4 - includes `vue-field-select` & `vue-field-select-valid`
  

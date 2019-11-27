@@ -144,21 +144,22 @@ export default {
         try {
             if (this.selected &&  this.actualItem && this.actualItem.hasOwnProperty(this.keyField)) {
                 if (loadMounted!=undefined && loadMounted===true) {
-                    if (this.selected[this.valueField]) {
-                        this.$emit('search-value', this.selected[this.valueField]);
-                    } else {
-                        this.selected[this.valueField]=this.values.find(value => value[this.currentKey] === this.actualItem[this.keyField]||value[this.currentKey] === Number(this.actualItem[this.keyField]))
-                        this.$emit('search-value', this.selected[this.valueField]);
+                    if (this.actualItem[this.keyField]) {
+                        this.$emit('id-sent',this.actualItem[this.keyField]);
                     }
-                    this.$emit('id-sent',this.actualItem[this.keyField]);
+                    if (this.actualItem[this.valueField]) {
+                        this.$emit('search-value', this.actualItem[this.valueField]);
+                    }
                 } else {
+                    if (!this.selected[this.valueField]) {
+                        this.selected[this.valueField]=this.values.find(value => value[this.currentKey] === this.actualItem[this.keyField]||value[this.currentKey] === Number(this.actualItem[this.keyField]))
+                    }
                     if (this.selected[this.valueField]) {
                         this.$emit('search-value', this.selected[this.valueField]);
-                    } else {
-                        this.selected[this.valueField]=this.values.find(value => value[this.currentKey] === this.actualItem[this.keyField]||value[this.currentKey] === Number(this.actualItem[this.keyField]))
-                        this.$emit('search-value', this.selected[this.valueField]);
                     }
-                    this.$emit('id-sent',this.actualItem[this.keyField]);
+                    if (this.actualItem[this.valueField]) {
+                        this.$emit('search-value', this.actualItem[this.valueField]);
+                    }
                 }
             }
         } catch(e) {}
