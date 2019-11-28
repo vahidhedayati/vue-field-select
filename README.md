@@ -300,6 +300,10 @@ export default {
 ```
 
 #### Changelog
+#### v.1.1.5
+- `id` `ref` tags added to autocomplete will be set to what ever you set `name` as .
+-  likely an issue with pre-loading existing data the created mounted functions did not work single mounted added
+
 #### v.1.1.4
 This is really version 1.0.1, should have kept to 1.1.3 as initial release to save on current headache revert
  

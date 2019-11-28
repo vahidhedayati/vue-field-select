@@ -122,46 +122,5 @@ export default {
           }
       };
       return p;
-    },
-    loadCreated(loadMounted) {
-        if (loadMounted==undefined||loadMounted===false) {
-            if (this.actualItem!=null) {
-                this.updateIncommingValue();
-            }
-        }
-        if (this.defaultValueRequired) {
-            this.selected = this.values[0]
-            if (this.selected) {
-                var vmodel = this.actualItem
-                vmodel[this.valueField]=this.selected[this.currentValue]
-                vmodel[this.keyField]=this.selected[this.currentKey]
-                this.$emit('input', vmodel)
-                //end of fix
-                this.$emit('id-sent', this.selected[this.currentKey])
-                this.$emit('search-value', this.selected[this.currentValue])
-            }
-        }
-        try {
-            if (this.selected &&  this.actualItem && this.actualItem.hasOwnProperty(this.keyField)) {
-                if (loadMounted!=undefined && loadMounted===true) {
-                    if (this.actualItem[this.keyField]) {
-                        this.$emit('id-sent',this.actualItem[this.keyField]);
-                    }
-                    if (this.actualItem[this.valueField]) {
-                        this.$emit('search-value', this.actualItem[this.valueField]);
-                    }
-                } else {
-                    if (!this.selected[this.valueField]) {
-                        this.selected[this.valueField]=this.values.find(value => value[this.currentKey] === this.actualItem[this.keyField]||value[this.currentKey] === Number(this.actualItem[this.keyField]))
-                    }
-                    if (this.selected[this.valueField]) {
-                        this.$emit('search-value', this.selected[this.valueField]);
-                    }
-                    if (this.actualItem[this.valueField]) {
-                        this.$emit('search-value', this.actualItem[this.valueField]);
-                    }
-                }
-            }
-        } catch(e) {}
     }
 }
