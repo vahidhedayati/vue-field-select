@@ -4,8 +4,9 @@
             :class="[clazz,errorClazz]"
             @change="onChange">
               <option v-if="blankForm && !readonly"  :value="null">{{field}}</option>
-              <option  v-if="!readonly" v-for="value in values" :value="value[currentKey]" :key="value[currentKey]"
-                      :selected="actualItem ?  (actualItem[keyField] === value[currentKey]? 'selected' : '') : '' ">
+              <option  v-if="!readonly" v-for="value in values"
+                       :value="value[currentKey]" :key="value[currentKey]"
+                      :selected="workOutSelected">
               {{ value[currentValue] }}
             </option>
     </select>
@@ -17,37 +18,9 @@
         props: VueFieldSelectLogic.loadProps(),
         computed:VueFieldSelectLogic.loadComputed(),
         methods:VueFieldSelectLogic.loadMethods(),
-        mounted:function(){
-            if (this.actualItem!=null) {
-                this.updateIncommingValue();
-            }
-            if (this.defaultValueRequired) {
-                this.selected = this.values[0]
-                if (this.selected) {
-                    var vmodel = this.actualItem
-                    vmodel[this.valueField]=this.selected[this.currentValue]
-                    vmodel[this.keyField]=this.selected[this.currentKey]
-                    this.$emit('input', vmodel)
-                    //end of fix
-                    this.$emit('id-sent', this.selected[this.currentKey])
-                    this.$emit('search-value', this.selected[this.currentValue])
-                }
-            }
-            try {
-                if (this.selected &&  this.actualItem && this.actualItem.hasOwnProperty(this.keyField)) {
-                    if (!this.selected[this.valueField]) {
-                        this.selected[this.valueField]=this.values.find(value => value[this.currentKey] === this.actualItem[this.keyField]||value[this.currentKey] === Number(this.actualItem[this.keyField]))
-                    }
-                    if (this.selected[this.valueField]) {
-                        this.$emit('search-value', this.selected[this.valueField]);
-                    }
-                    if (this.selected[this.valueField]) {
-                        this.$emit('search-value', this.selected[this.valueField]);
-                    }
-                }
-            } catch(e) {}
-        },
-        data: function () {
+        mounted() {return VueFieldSelectLogic.mounted(this)},
+        data: VueFieldSelectLogic.dataObject(),
+        data1: function () {
             return {
                 activePage:true,
                 defaultValueRequired: (this.actualItem==null || this.actualItem &&

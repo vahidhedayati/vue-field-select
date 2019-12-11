@@ -46,6 +46,7 @@ keyField | String | id | id for the hidden input / your expected object key i.e.
 valueField | String | name | the value that is set for your expected object value  i.e. name:xxx
 remoteKey | String | *keyField | the value that is set for your expected object key  i.e. {id:xxx}
 remoteValue| String | *valueField | the value that is set for your expected object value  i.e. {name:xxx}
+remoteSelectValue| String | - | This is complex to explain follow example 5 to understand better - used for dynamic content
 showSelect| Boolean | true | show select box / area
 field| String | name | the value that is set for a blank select box
 clazz| String | - | css classes to load if additional css styling needed
@@ -301,7 +302,108 @@ export default {
 </script>
 ```
 
+
+                        
+##### Example 5 :  Complex dynamic field selection from 1.1.6+ 
+
+When changing selection you should see at the bottom of the page current selections change  as an example
+
+###### Output
+
+```
+[ { "id": "SPORT", "value": "FOOT" }, { "id": "OFFICE" }, { "id": "HOME", "value": "AWAY" } ]
+[ { "id": "SPORT", "value": "RUG" }, { "id": "OFFICE", "value": "REA" }, { "id": "HOME", "value": "SPO" } ]
+```
+ 
+###### content
+```html
+      <section class="row colset-2-its well">
+        <h1>Test complex field select</h1>
+
+        <div  v-for="(currentField,index) in dynamicContent"  v-if="currentField.type=='SELECT'">
+          <vue-field-select v-model="findFromArray(selectItems,'id',currentField.id).currentObject"
+                          :validationErrors="validationErrors"
+                          :name="currentField.id" field=""
+                          :actualItem="findFromArray(selectItems,'id',currentField.id).currentObject"
+                          :values="currentField.values"
+                          remoteKey="code"
+                          remoteValue="description"
+                          remoteStoreValue="code"
+                          valueField="value"
+                          keyField="value"
+                          :validation="{required:currentField.mandatory}"></vue-field-select>
+
+        </div>
+        <h4>Curent select to be sent is : <br></h4>
+        <h6>{{selectItems}}</h6>
+      </section>
+```
+```javascript
+<script> 
+ import VueFieldSelect from 'vue-field-select'
+    export default {
+        name: 'Welcome',
+        data () {
+            return {
+                validationErrors:[],
+                selectItems:[{id:'SPORT', value:'FOOT'}, {id:'OFFICE', value:''}, {id:'HOME', value:'AWAY'}],
+                dynamicContent:[
+                    {id:'SPORT',
+                        type:'SELECT',
+                        mandatory:true,
+                        values:[
+                            {code:'FOOT', description:'FootBall'},
+                            {code:'BASE', description:'BaseBall'},
+                            {code:'RUG', description:'RUGBY'}
+                        ]
+                    },
+                    {id:'OFFICE',
+                        type:'SELECT',
+                        mandatory:false,
+                        values:[
+                            {code:'FOC', description:'Focus'},
+                            {code:'REA', description:'READ'},
+                            {code:'RES', description:'Research'}
+                        ]
+                    },
+                    {id:'HOME',
+                        type:'SELECT',
+                        mandatory:false,
+                        values:[
+                            {code:'AWAY', description:'Vacation'},
+                            {code:'BUSY', description:'Busy'},
+                            {code:'SPO', description:'Sports'}
+                        ]
+                    },
+                ]
+            }
+        },
+        components: {
+            VueFieldSelect
+        },
+        methods: {
+            findFromArray(array, key, value) {
+                let currentObject = {}
+                if (Array.isArray(array)) {
+                    currentObject = array.filter(function (element) {
+                        return element[key] == value;
+                    }).shift();
+                }
+                return {
+                    currentObject
+                };
+            }
+        }
+    }
+</script>
+```
+               
+               
 #### Changelog
+#### v.1.1.6
+- Dynamic field selection support added for dynamically producing binding to provided selection content and selection set data.
+Please refer to Example 5 or or complex field select example in demo project provided 
+
 #### v.1.1.5
 - `id` `ref` tags added to autocomplete will be set to what ever you set `name` as .
 -  likely an issue with pre-loading existing data the created mounted functions did not work single mounted added
